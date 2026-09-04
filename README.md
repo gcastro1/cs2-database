@@ -1,2 +1,3 @@
-# cs2-database
-UTSA CSCI 3743 Database Systems Project
+# Stardust's Counter-Strike 2 Database
+
+MySQL database storing competitive player and team data.
