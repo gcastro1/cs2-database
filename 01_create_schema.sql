@@ -40,7 +40,7 @@ CREATE TABLE teams (
     team_id          INT          NOT NULL AUTO_INCREMENT,
     team_name        VARCHAR(50)  NOT NULL,
     foundation_date  DATE         NOT NULL,
-    valve_ranking    INT          ,
+    valve_ranking    INT,
 
     CONSTRAINT pk_teams               PRIMARY KEY (team_id),
     CONSTRAINT uq_teams_name          UNIQUE (team_name),
@@ -97,7 +97,7 @@ CREATE TABLE tournaments (
 -- ---------------------------------------------------------------------
 CREATE TABLE players (
     player_id   INT          NOT NULL AUTO_INCREMENT,
-    team_id     INT          ,
+    team_id     INT,
     first_name  VARCHAR(50)  NOT NULL,
     last_name   VARCHAR(50)  NOT NULL,
     ign         VARCHAR(30)  NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE players (
 CREATE TABLE tournament_entrants (
     tournament_id  INT  NOT NULL,
     team_id        INT  NOT NULL,
-    placement      INT  ,
+    placement      INT,
 
     CONSTRAINT pk_tournament_entrants PRIMARY KEY (tournament_id, team_id),
     CONSTRAINT fk_entrants_tournament FOREIGN KEY (tournament_id)
@@ -150,7 +150,7 @@ CREATE TABLE tournament_entrants (
 -- ---------------------------------------------------------------------
 CREATE TABLE playoff_series (
     series_id      INT          NOT NULL AUTO_INCREMENT,
-    winner_id      INT          ,
+    winner_id      INT,
     tournament_id  INT          NOT NULL,
     team1_id       INT          NOT NULL,
     team2_id       INT          NOT NULL,
@@ -196,7 +196,7 @@ CREATE TABLE matches (
     series_id      INT   NOT NULL,
     match_number   INT   NOT NULL,
     map_id         INT   NOT NULL,
-    winner_id      INT   ,
+    winner_id      INT,
     creation_date  DATE  NOT NULL DEFAULT (CURRENT_DATE),
 
     CONSTRAINT pk_matches PRIMARY KEY (match_id),
