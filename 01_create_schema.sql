@@ -19,12 +19,13 @@
 --   7. matches               -> playoff_series, maps, teams
 --   8. player_match_stats    -> matches, players
 --
--- TODO: Rules that span more than one table (e.g., a match winner must be one
+-- Rules that span more than one table (e.g., a match winner must be one
 -- of its series' two teams) cannot be written as a CHECK in MySQL. They
 -- are listed at the bottom of this file and are enforced by triggers in
--- 04_triggers_procedure_function.sql.
+-- 04_triggers_procedure_view.sql.
 -- =====================================================================
-CREATE DATABASE IF NOT EXISTS cs2_competitive;
+DROP DATABASE IF EXISTS cs2_competitive;
+CREATE DATABASE cs2_competitive;
 USE cs2_competitive;
 
 
