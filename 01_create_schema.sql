@@ -251,7 +251,7 @@ CREATE TABLE player_match_stats (
 
 
 -- =====================================================================
--- Cross-table business rules (enforced by triggers in file 04)
+-- Cross-table business rules (enforced by triggers in file 05)
 -- MySQL CHECK constraints can only see columns in the same row, so these
 -- rules need triggers:
 --   * A match winner must be team1 or team2 of the match's series.
