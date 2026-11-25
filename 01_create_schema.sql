@@ -22,7 +22,7 @@
 -- Rules that span more than one table (e.g., a match winner must be one
 -- of its series' two teams) cannot be written as a CHECK in MySQL. They
 -- are listed at the bottom of this file and are enforced by triggers in
--- 04_triggers_procedure_view.sql.
+-- 05_triggers.sql.
 -- =====================================================================
 DROP DATABASE IF EXISTS cs2_competitive;
 CREATE DATABASE cs2_competitive;
@@ -251,7 +251,7 @@ CREATE TABLE player_match_stats (
 
 
 -- =====================================================================
--- Cross-table business rules (enforced by triggers in file 05)
+-- Cross-table business rules (enforced by triggers in file 05_triggers.sql)
 -- MySQL CHECK constraints can only see columns in the same row, so these
 -- rules need triggers:
 --   * A match winner must be team1 or team2 of the match's series.

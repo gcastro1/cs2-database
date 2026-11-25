@@ -17,9 +17,6 @@
 --   01_create_schema.sql
 --   02_insert_data.sql
 --
--- Submission Order:
---   This script follows 03_queries.sql and 04_view.sql.
---
 -- Match Workflow:
 --   Insert scheduled matches with a NULL winner or completed matches
 --   with a winner. UPDATE can record or correct an existing result.
@@ -34,7 +31,7 @@ DROP TRIGGER IF EXISTS trg_player_matches_before_insert;
 DROP TRIGGER IF EXISTS trg_matches_after_update;
 DROP TRIGGER IF EXISTS trg_matches_before_delete;
 
-DELIMITER $$
+DELIMITER //
 
 -- =====================================================================
 -- Trigger Definitions
@@ -66,14 +63,14 @@ BEGIN
     IF NEW.winner_id IS NOT NULL AND NEW.winner_id NOT IN (series_team1, series_team2) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The winner must be either Team 1 or Team 2.';
     END IF;
-END$$
+END //
 
--- INSERT: schedule a match within its series' best-of limit.
+-- INSERT: Recalculates series results after a match is inserted.
 CREATE TRIGGER trg_matches_after_insert
 AFTER INSERT ON matches
 FOR EACH ROW
 BEGIN
-    DECLARE series_team1 INT;
+    DECLARE series_team1 INT; 
     DECLARE series_team2 INT;
     DECLARE series_best_of INT;
     DECLARE event_id INT;
@@ -126,7 +123,7 @@ BEGIN
             END IF;
         END IF;
     END IF;
-END$$
+END //
 
 -- INSERT: player must be team1 or team2 of the match's series.
 CREATE TRIGGER trg_player_matches_before_insert
@@ -166,7 +163,7 @@ BEGIN
     IF series_team_count >= 5 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'This team already has five player stat lines for this match.';
     END IF;
-END$$
+END //
 
 -- UPDATE: validate the match and recalculate its series winner when the
 -- result changes. A Grand Final also sets the tournament entrants'
@@ -239,7 +236,7 @@ BEGIN
             END IF;
         END IF;
     END IF;
-END$$
+END //
 
 -- DELETE: allow unused scheduled match to be removed. Protect scored matches
 -- and matches with player statistics from direct deletion. The demo and
@@ -252,7 +249,7 @@ BEGIN
 ) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete a match with a result or player statistics.';
     END IF;
-END$$
+END //
 
 DELIMITER ;
 

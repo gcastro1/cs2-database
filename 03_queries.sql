@@ -43,7 +43,6 @@ Query 1
 Displays Current Team Rosters
 Question: What players are currently on each team?
 */
-
 SELECT
     t.team_name,
     CONCAT(p.first_name, ' ', p.last_name) AS player_name,
@@ -59,7 +58,6 @@ Query 2
 Displays Number of Players Per Team
 Question: Which teams currently have the largest rosters?
 */
-
 SELECT
     t.team_name,
     COUNT(p.player_id) AS roster_size
